@@ -1,0 +1,26 @@
+{
+  "name": "promise4solo",
+  "version": "0.0.0",
+  "description": "provide wrap function for promise solo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josudoey/promise4solo.git"
+  },
+  "keywords": [
+    "promise",
+    "solo",
+    "utility",
+    "sync",
+    "flow"
+  ],
+  "author": "JoeyFang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josudoey/promise4solo/issues"
+  },
+  "homepage": "https://github.com/josudoey/promise4solo#readme"
+}
