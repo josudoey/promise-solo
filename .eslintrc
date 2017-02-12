@@ -1,0 +1,23 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "no-console": 0,
+
+    "camelcase": ["error"],
+    "indent": [
+      "error", 2
+    ],
+    "linebreak-style": [
+      "error", "unix"
+    ],
+    "quotes": [
+      "error", "single"
+    ],
+    "semi": [
+      "error", "always"
+    ]
+  }
+}
