@@ -4,7 +4,7 @@
   "description": "provide wrap function for promise solo",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "istanbul cover _mocha  --print both",
     "eslint": "eslint ./index.js"
   },
   "repository": {
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/josudoey/promise4solo#readme",
   "devDependencies": {
+    "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "sinon-es6": "0.0.3"
   }
