@@ -15,39 +15,53 @@ $ npm install --save promise4solo
 
 ```js
 var solo = require('promise4solo')();
-var delay = function (ms) {
+var now = function () {
+  this.start = this.start || Date.now();
+  return Date.now() - this.start;
+};
+
+var songAsync = function (ms) {
   var self = this;
-  var now = Date.now();
+  var ts = now();
+  if (!ms) {
+    throw new Error(ts + self.name + ' oops');
+  }
+  console.log(ts + self.name + ' begin song ' + ms);
   return new Promise(function (resolve) {
-    console.log(now + self.name + ' begin song ' + ms);
     setTimeout(function () {
-      console.log(now + self.name + ' end song at ' + Date.now());
-      resolve();
-    }, ms)
+      var end = now();
+      console.log(end + self.name + ' end song ' + ms);
+      resolve(end);
+    }, ms);
   });
-}
+};
 
 var who = {
-  name: ' foo'
-}
+  name: ' joey'
+};
 
-var delay = solo(delay, who);
+var songSolo = solo(songAsync, who);
+var saySolo = solo(function (msg) {
+  console.log(now() + this.name + ' say ' + msg);
+}, who);
 
-var say = solo(function (msg) {
-  console.log(Date.now() + this.name + ' say ' + msg);
-}, who)
-
-delay(1000);
-say('hi');
-delay(1000);
-delay(1000);
+songSolo(1000);
+saySolo('hi');
+songSolo().catch(function (err) {
+  console.log(err.message);
+});
+songSolo(100).then(function (end) {
+  console.log(end + ' done');
+});
+console.log(now() + ' start');
 
 // Output:
-// 1486742125167 foo begin song 1000
-// 1486742125167 foo end song at 1486742126188
-// 1486742126191 foo say hi
-// 1486742126191 foo begin song 1000
-// 1486742126191 foo end song at 1486742127193
-// 1486742127193 foo begin song 1000
-// 1486742127193 foo end song at 1486742128194
+// 0 start
+// 3 joey begin song 1000
+// 1011 joey end song 1000
+// 1011 joey say hi
+// 1011 joey oops
+// 1012 joey begin song 100
+// 1118 joey end song 100
+// 1118 done
 ```
