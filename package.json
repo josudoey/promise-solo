@@ -15,7 +15,7 @@
     "promise",
     "solo",
     "utility",
-    "sync",
+    "async",
     "flow"
   ],
   "author": "JoeyFang",
