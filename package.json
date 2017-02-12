@@ -1,6 +1,6 @@
 {
   "name": "promise4solo",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "provide wrap function for promise solo",
   "main": "index.js",
   "scripts": {
