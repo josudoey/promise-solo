@@ -1,5 +1,7 @@
 # promise4solo
 
+[![Build Status](https://travis-ci.org/josudoey/promise4solo.svg?branch=master)](https://travis-ci.org/josudoey/promise4solo)
+
 ## Installation
 
 ```bash
