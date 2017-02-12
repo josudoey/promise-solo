@@ -1,7 +1,7 @@
 {
   "name": "promise4solo",
   "version": "1.0.0",
-  "description": "provide wrap function for promise solo",
+  "description": "provide a wrap function for promise solo",
   "main": "index.js",
   "scripts": {
     "test": "istanbul cover _mocha  --print both",
