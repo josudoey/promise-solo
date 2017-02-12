@@ -1,7 +1,7 @@
 /* eslint-env node, mocha */
 
 var assert = require('assert');
-var sinon = require('sinon-es6');
+var sinon = require('sinon');
 var createSoloWrap = require('../');
 
 describe('solo normal function', function () {
