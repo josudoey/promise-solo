@@ -65,3 +65,16 @@ console.log(now() + ' start');
 // 1118 joey end song 100
 // 1118 done
 ```
+
+## API
+
+### solo(func, self)
+```js
+var func = solo(function(val) {
+  return Promise.resolve(val);
+});
+
+func(true).then(function (val) {
+
+});
+```
