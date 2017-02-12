@@ -34,6 +34,18 @@ describe('solo normal function', function () {
     assert(spy.notCalled);
   });
 
+  it('argument exception', function () {
+    assert.throws(function () {
+      solo();
+    }, TypeError, 'should throw TypeError');
+    assert.throws(function () {
+      solo('fake');
+    }, TypeError, 'should throw TypeError');
+    assert.throws(function () {
+      solo({});
+    }, TypeError, 'should throw TypeError');
+  });
+
 });
 
 describe('solo async function ', function () {
@@ -70,8 +82,50 @@ describe('solo async function ', function () {
       assert(spy2.calledTwice);
       assert(spy.lastCall.args[0] === 1, 'args[0] should is 1');
       assert(spy.lastCall.args[1] === spy2, 'args[1] should is spy2');
-      done();
+    }).then(done).catch(done);
+    assert(spy.notCalled);
+    assert(spy1.notCalled);
+    assert(spy2.notCalled);
+  });
+
+  it('normal function throw error', function (done) {
+    var spy = sinon.spy(function () {
+      throw new Error('fake');
+    });
+    var throwSolo = solo(spy);
+    throwSolo().then(function () {
+      done(new Error('not should run here'));
+    }).catch(function (err) {
+      assert.equal(err.message, 'fake', 'should reject error');
+    }).then(done).catch(done);
+    assert(spy.notCalled);
+  });
+
+  it('async function reject', function (done) {
+    var spy = sinon.spy(delay);
+    var delaySolo = solo(spy);
+    var rejectSolo = solo(function () {
+      return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          reject(new Error('fake'));
+        }, 0);
+      });
+    });
+    var spy1 = sinon.spy();
+    var spy2 = sinon.spy();
+    delaySolo(10, spy1);
+    rejectSolo().then(function () {
+      done(new Error('not should run here'));
+    }).catch(function (err) {
+      assert.equal(err.message, 'fake', 'should reject error');
     }).catch(done);
+    delaySolo(1, spy2).then(function () {
+      assert(spy.calledTwice);
+      assert(spy1.calledTwice);
+      assert(spy2.calledTwice);
+      assert(spy.lastCall.args[0] === 1, 'args[0] should is 1');
+      assert(spy.lastCall.args[1] === spy2, 'args[1] should is spy2');
+    }).catch(done).then(done);
     assert(spy.notCalled);
     assert(spy1.notCalled);
     assert(spy2.notCalled);

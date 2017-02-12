@@ -7,7 +7,7 @@ module.exports = function () {
     return function () {
       var args = Array.prototype.slice.call(arguments);
       var sing = new Promise(function (resolve, reject) {
-        var next = function (err) {
+        var next = function () {
           try {
             var r = func.apply(self, args);
             if (!r || !r.then) {
@@ -15,7 +15,7 @@ module.exports = function () {
             }
             r.then(resolve).catch(reject);
           } catch (e) {
-            reject(err);
+            reject(e);
           }
         };
         last.then(next).catch(next);
