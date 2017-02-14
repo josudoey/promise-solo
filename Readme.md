@@ -70,7 +70,7 @@ console.log(now() + ' start');
 
 Return a solo wrap function, and the wrap function will return promise and guarantee one async function be run for order async flow.
 
-### solo(func, self)
+### solo(func[, thisArg])
 ```js
 var funcAsync = function(val){
   return new Promise(function(resolve){
