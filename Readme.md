@@ -20,17 +20,17 @@ var now = function () {
   return Date.now() - this.start;
 };
 
-var songAsync = function (ms) {
+var singAsync = function (ms) {
   var self = this;
   var ts = now();
   if (!ms) {
     throw new Error(ts + self.name + ' oops');
   }
-  console.log(ts + self.name + ' begin song ' + ms);
+  console.log(ts + self.name + ' begin sing ' + ms);
   return new Promise(function (resolve) {
     setTimeout(function () {
       var end = now();
-      console.log(end + self.name + ' end song ' + ms);
+      console.log(end + self.name + ' end sing ' + ms);
       resolve(end);
     }, ms);
   });
@@ -40,29 +40,29 @@ var who = {
   name: ' joey'
 };
 
-var songSolo = solo(songAsync, who);
+var singSolo = solo(singAsync, who);
 var saySolo = solo(function (msg) {
   console.log(now() + this.name + ' say ' + msg);
 }, who);
 
-songSolo(1000);
+singSolo(1000);
 saySolo('hi');
-songSolo().catch(function (err) {
+singSolo().catch(function (err) {
   console.log(err.message);
 });
-songSolo(100).then(function (end) {
+singSolo(100).then(function (end) {
   console.log(end + ' done');
 });
 console.log(now() + ' start');
 
 // Output:
 // 0 start
-// 3 joey begin song 1000
-// 1011 joey end song 1000
+// 3 joey begin sing 1000
+// 1011 joey end sing 1000
 // 1011 joey say hi
 // 1011 joey oops
-// 1012 joey begin song 100
-// 1118 joey end song 100
+// 1012 joey begin sing 100
+// 1118 joey end sing 100
 // 1118 done
 ```
 

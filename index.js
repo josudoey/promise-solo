@@ -6,7 +6,7 @@ module.exports = function () {
     }
     return function () {
       var args = Array.prototype.slice.call(arguments);
-      var sing = new Promise(function (resolve, reject) {
+      var song = new Promise(function (resolve, reject) {
         var next = function () {
           try {
             var r = func.apply(self, args);
@@ -20,8 +20,8 @@ module.exports = function () {
         };
         last.then(next).catch(next);
       });
-      last = sing;
-      return sing;
+      last = song;
+      return song;
     };
   };
   return wrap;
