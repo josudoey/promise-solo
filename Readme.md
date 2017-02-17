@@ -1,5 +1,6 @@
 # promise4solo
 
+[![NPM](https://nodei.co/npm/promise4solo.svg?downloads=true&downloadRank=true)](https://nodei.co/npm/promise4solo/)
 [![Build Status](https://travis-ci.org/josudoey/promise4solo.svg?branch=master)](https://travis-ci.org/josudoey/promise4solo)
 [![Test Coverage](https://codeclimate.com/github/josudoey/promise4solo/badges/coverage.svg)](https://codeclimate.com/github/josudoey/promise4solo/coverage)
 [![Code Climate](https://codeclimate.com/github/josudoey/promise4solo/badges/gpa.svg)](https://codeclimate.com/github/josudoey/promise4solo)
