@@ -1,21 +1,21 @@
-# promise4solo
+# promise-solo
 
-[![NPM](https://nodei.co/npm/promise4solo.svg?downloads=true&downloadRank=true)](https://nodei.co/npm/promise4solo/)
-[![Build Status](https://travis-ci.org/josudoey/promise4solo.svg?branch=master)](https://travis-ci.org/josudoey/promise4solo)
-[![Test Coverage](https://codeclimate.com/github/josudoey/promise4solo/badges/coverage.svg)](https://codeclimate.com/github/josudoey/promise4solo/coverage)
-[![Code Climate](https://codeclimate.com/github/josudoey/promise4solo/badges/gpa.svg)](https://codeclimate.com/github/josudoey/promise4solo)
-[![Issue Count](https://codeclimate.com/github/josudoey/promise4solo/badges/issue_count.svg)](https://codeclimate.com/github/josudoey/promise4solo)
+[![NPM](https://nodei.co/npm/promise-solo.svg?downloads=true&downloadRank=true)](https://nodei.co/npm/promise-solo/)
+[![Build Status](https://travis-ci.org/josudoey/promise-solo.svg?branch=master)](https://travis-ci.org/josudoey/promise-solo)
+[![Test Coverage](https://codeclimate.com/github/josudoey/promise-solo/badges/coverage.svg)](https://codeclimate.com/github/josudoey/promise-solo/coverage)
+[![Code Climate](https://codeclimate.com/github/josudoey/promise-solo/badges/gpa.svg)](https://codeclimate.com/github/josudoey/promise-solo)
+[![Issue Count](https://codeclimate.com/github/josudoey/promise-solo/badges/issue_count.svg)](https://codeclimate.com/github/josudoey/promise-solo)
 
 ## Installation
 
 ```bash
-$ npm install --save promise4solo
+$ npm install --save promise-solo
 ```
 
 ## Example
 
 ```js
-var solo = require('promise4solo')();
+var solo = require('promise-solo')();
 var now = function () {
   this.start = this.start || Date.now();
   return Date.now() - this.start;
@@ -73,15 +73,37 @@ Return a solo wrap function, and the wrap function will return promise and guara
 
 ### solo(func[, thisArg])
 ```js
-var funcAsync = function(val){
+const funcAsync = function(val){
   return new Promise(function(resolve){
     //...
     resolve(val);
   });
 }
 
-var funcSolo = solo(funcAsync);
+const funcSolo = solo(funcAsync);
 funcSolo(true).then(function (val) {
 
 });
+```
+
+### solo.spy(instance, methodName)
+```js
+const solo = require('promise-solo')()
+class Controller {
+  constructor(){
+    solo.spy(this, 'sing')
+  }
+
+  async sing(ms){
+    console.log(`begin sing ${ms} ms`)
+    await new Promise(function(resolve){
+      setTimeout(resolve,ms)
+    })
+    console.log(`end sing`)
+  }
+}
+
+const controller = new Controller()
+controller.sing(1000)
+controller.sing(2000)
 ```

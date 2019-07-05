@@ -1,29 +1,33 @@
 module.exports = function () {
-  var last = Promise.resolve();
-  var wrap = function (func, self) {
+  let live = Promise.resolve()
+  const wrap = function (func, self) {
     if (typeof func !== 'function') {
-      throw new TypeError('"func" argument must be a function');
+      throw new TypeError('"func" argument must be a function')
     }
     return function () {
-      var args = Array.prototype.slice.call(arguments);
-      var song = new Promise(function (resolve, reject) {
-        var next = function () {
+      const args = Array.prototype.slice.call(arguments)
+      const song = new Promise(function (resolve, reject) {
+        const next = function () {
           try {
-            var r = func.apply(self, args);
+            const r = func.apply(self, args)
             if (!r || !r.then) {
-              return resolve(r);
+              return resolve(r)
             }
-            r.then(resolve).catch(reject);
+            r.then(resolve).catch(reject)
           } catch (e) {
-            reject(e);
+            reject(e)
           }
-        };
-        last.then(next).catch(next);
-      });
-      last = song;
-      return song;
-    };
-  };
-  return wrap;
-};
+        }
+        live.then(next).catch(next)
+      })
+      live = song
+      return song
+    }
+  }
 
+  wrap.spy = function (self, method) {
+    const func = self[method]
+    self[method] = wrap(func, self)
+  }
+  return wrap
+}

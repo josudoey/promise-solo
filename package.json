@@ -1,10 +1,10 @@
 {
-  "name": "promise4solo",
-  "version": "1.0.3",
+  "name": "promise-solo",
+  "version": "1.0.0",
   "description": "provide a wrap function for promise solo",
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover _mocha  --print both",
+    "test": "nyc --reporter=lcov --reporter=text mocha",
     "eslint": "eslint ./index.js"
   },
   "repository": {
@@ -21,12 +21,12 @@
   "author": "JoeyFang",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/josudoey/promise4solo/issues"
+    "url": "https://github.com/josudoey/promise-solo/issues"
   },
-  "homepage": "https://github.com/josudoey/promise4solo#readme",
+  "homepage": "https://github.com/josudoey/promise-solo#readme",
   "devDependencies": {
-    "istanbul": "^0.4.5",
-    "mocha": "^3.2.0",
-    "sinon": "^1.17.7"
+    "nyc": "^14.1.1",
+    "mocha": "^6.1.4",
+    "sinon": "^7.3.2"
   }
 }
